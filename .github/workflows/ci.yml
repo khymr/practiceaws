@@ -1,0 +1,47 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
+name: Java CI with Gradle
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: 🐳 JDK 17 세팅
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+
+      - name: 🐳 gradlew 실행 권한 설정
+        run: chmod +x gradlew
+
+      - name: 🐳 테스트 진행
+        run: ./gradlew --info test
+
+      - name: 🐳 테스트 결과 Report
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()  # 테스트가 실패하여도 Report를 보기 위해 `always`로 설정
+        with:
+          files: 'build/test-results/**/*.xml'
+
+      - name: 🐳 테스트 실패 Comment (JUnit Report)
+        uses: mikepenz/action-junit-report@v4  # 최신 버전 적용
+        if: always()  # 테스트 실패해도 실행
+        with:
+          report_paths: 'build/test-results/test/TEST-*.xml'
