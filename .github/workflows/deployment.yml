@@ -80,6 +80,7 @@ jobs:
         run: |
           nohup ssh -N -L 3306:${{ secrets.RDS_ENDPOINT }}:3306 ubuntu@${{ secrets.EC2_HOST }} -i ~/.ssh/id_rsa &
           sleep 5 
+          
 
 
   deploy:
