@@ -13,6 +13,7 @@ class Ec2rdsApplicationTests {
 		assertThat(1 + 1).isEqualTo(2); // ✅ 항상 성공하는 테스트
 		assertThat(1 + 2).isEqualTo(3);
 		assertThat(1 + 3).isEqualTo(4);
+		assertThat(1 + 3).isEqualTo(3);
 	}
 
 }
