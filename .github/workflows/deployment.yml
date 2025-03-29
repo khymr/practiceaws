@@ -56,6 +56,7 @@ jobs:
             -f docker/Dockerfile \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY_NAME }}:${{ steps.generate_tag.outputs.tag }} .
 
+
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
