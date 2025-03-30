@@ -14,6 +14,8 @@ services:
       resources:
         limits:
           memory: 800M
+    networks:
+      - backend
 
   nginx:
     depends_on:
@@ -25,3 +27,8 @@ services:
       context: ./nginx
     ports:
       - "80:80"
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
