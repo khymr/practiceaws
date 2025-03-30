@@ -107,7 +107,6 @@ jobs:
           target: 'compose'
           rm: true
 
-
       - name: SSH remote and Run Docker Compose
         uses: appleboy/ssh-action@master
         env:
