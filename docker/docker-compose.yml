@@ -16,6 +16,7 @@ services:
           memory: 800M
     networks:
       - backend
+      -
 
   nginx:
     depends_on:
